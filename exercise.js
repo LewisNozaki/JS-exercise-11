@@ -35,3 +35,26 @@ function cakes(recipe, available) {
 }
 
 // Solution 2
+function cakes(recipe, available) {
+  var numCakes = [];
+  
+  for (let key in recipe) {
+    if (recipe.hasOwnProperty(key)) {
+      if (key in available) {
+        numCakes.push(Math.floor(available[key] / recipe[key]));
+      } else {
+        return 0;
+      }
+    }
+  }
+  
+  return Math.min.apply(null, numCakes); 
+  
+}
+
+// Solution 3
+function cakes(recipe, available) {
+  return Object.keys(recipe).reduce(function(val, ingredient) {
+    return Math.min(Math.floor(available[ingredient] / recipe[ingredient] || 0), val)
+  }, Infinity)  
+}
